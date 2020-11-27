@@ -21,9 +21,9 @@ time_t time(time_t *res)
 }
 
 #ifdef __unix__
-int gettimeofday(struct timeval *tv, struct timezone *tz)
+int gettimeofday(struct timeval *tv, void *__restrict tzp)
 {
-	
+	struct timezone *tz = (struct timezone *) tzp;
 	char *sec_str = getenv("TV_SEC");
 	char *usec_str = getenv("TV_USEC");
 	tv->tv_sec = sec_str ? atoi(sec_str) : 0;
